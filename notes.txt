@@ -1,0 +1,76 @@
+angular-app/
+│── src/
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── components/
+│   │   │   │   ├── header/
+│   │   │   │   │   ├── header.component.ts → export class **HeaderComponent**
+│   │   │   │   ├── footer/
+│   │   │   │   │   ├── footer.component.ts → export class **FooterComponent**
+│   │   │   │   ├── sidebar/
+│   │   │   │   │   ├── sidebar.component.ts → export class **SidebarComponent**
+│   │   │   ├── services/
+│   │   │   │   ├── api.service.ts → export class **ApiService**
+│   │   │   │   ├── auth.service.ts → export class **AuthService**
+│   │   │   ├── guards/
+│   │   │   │   ├── auth.guard.ts → export class **AuthGuard**
+│   │   │   │   ├── role.guard.ts → export class **RoleGuard**
+│   │   │   ├── interceptors/
+│   │   │   │   ├── auth.interceptor.ts → export class **AuthInterceptor**
+│   │   │   │   ├── error.interceptor.ts → export class **ErrorInterceptor**
+│   │   │   ├── models/
+│   │   │   │   ├── user.model.ts → export interface **User**
+│   │   │   │   ├── product.model.ts → export interface **Product**
+│   │   │   ├── constants/
+│   │   │   │   ├── api-endpoints.ts → export const **API_ENDPOINTS**
+│   │   │   ├── core.module.ts → export class **CoreModule**
+│   │   │
+│   │   ├── shared/
+│   │   │   ├── components/
+│   │   │   │   ├── button/
+│   │   │   │   │   ├── button.component.ts → export class **ButtonComponent**
+│   │   │   │   ├── card/
+│   │   │   │   │   ├── card.component.ts → export class **CardComponent**
+│   │   │   │   ├── modal/
+│   │   │   │   │   ├── modal.component.ts → export class **ModalComponent**
+│   │   │   │   ├── loader/
+│   │   │   │   │   ├── loader.component.ts → export class **LoaderComponent**
+│   │   │   ├── directives/
+│   │   │   │   ├── highlight.directive.ts → export class **HighlightDirective**
+│   │   │   ├── pipes/
+│   │   │   │   ├── date-format.pipe.ts → export class **DateFormatPipe**
+│   │   │   ├── shared.module.ts → export class **SharedModule**
+│   │   │
+│   │   ├── features/
+│   │   │   ├── auth/
+│   │   │   │   ├── login/
+│   │   │   │   │   ├── login.component.ts → export class **LoginComponent**
+│   │   │   │   ├── register/
+│   │   │   │   │   ├── register.component.ts → export class **RegisterComponent**
+│   │   │   │   ├── auth.module.ts → export class **AuthModule**
+│   │   │   ├── dashboard/
+│   │   │   │   ├── dashboard.component.ts → export class **DashboardComponent**
+│   │   │   │   ├── dashboard.module.ts → export class **DashboardModule**
+│   │   │
+│   │   ├── state/
+│   │   │   ├── auth/
+│   │   │   │   ├── auth.actions.ts → export const **AuthActions**
+│   │   │   │   ├── auth.effects.ts → export class **AuthEffects**
+│   │   │   │   ├── auth.reducer.ts → export function **authReducer**
+│   │   │   │   ├── auth.selectors.ts → export const **AuthSelectors**
+│   │   │   │   ├── auth.state.ts → export interface **AuthState**
+│   │   │   ├── app.state.ts → export interface **AppState**
+│   │   │
+│   │   ├── styles/
+│   │   │   ├── _variables.scss
+│   │   │   ├── _mixins.scss
+│   │   │   ├── _typography.scss
+│   │   │   ├── global.scss
+│   │   │
+│   │   ├── app.component.ts → export class **AppComponent**
+│   │   ├── app.module.ts → export class **AppModule**
+│   │   ├── main.ts → Bootstrap **AppModule**
+│
+│── angular.json
+│── tsconfig.json
+│── package.json
