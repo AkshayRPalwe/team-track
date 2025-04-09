@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="text-center">
+    <h1>{{ counter$ | async }}</h1>
+
+    <div class="d-flex flex-column align-items-center">
+      <div
+        class="btn-group btn-group-lg"
+        role="group"
+        aria-label="Large button group"
+      >
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="decrement()"
+        >
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-outline-primary" (click)="reset()">
+          <i class="fas fa-undo"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="increment()"
+        >
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      <div
+        class="btn-group btn-group-lg mt-3"
+        role="group"
+        aria-label="Large button group"
+      >
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="loadCounter()"
+        >
+          Load
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="saveCounter()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success mt-5" routerLink="employee">Redirect to CRUD</button>
+  </div>
+</div>

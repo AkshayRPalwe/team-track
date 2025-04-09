@@ -12,17 +12,11 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee',
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatTableModule,
-    CommonModule,
-  ],
+  standalone: false,
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
-export class EmployeeComponent implements OnInit, OnDestroy {
+export class EmployeeComponent {
   empList: Employee[] = [];
   dataSource!: MatTableDataSource<Employee>;
   displayedColumns: string[] = [
@@ -92,3 +86,4 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       });
   }
 }
+ 

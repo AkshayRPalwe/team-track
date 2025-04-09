@@ -1,46 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatIconModule } from '@angular/material/icon';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-add-employee',
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatIconModule,
-  ],
-  providers: [provideNativeDateAdapter()],
-
+  standalone: false,
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.scss',
 })
-export class AddEmployeeComponent implements OnInit {
+export class AddEmployeeComponent {
   title = 'Add Employee';
   dialogData: any;
   isEdit = false;
