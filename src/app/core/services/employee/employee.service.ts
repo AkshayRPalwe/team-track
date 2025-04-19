@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employee } from '../models/employee.model';
+import { Employee } from '../../models/employee.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,10 @@ export class EmployeeService {
 
   getAllEmployees() {
     return this._http.get<Employee[]>(this.url);
+  }
+
+  getFilteredEmployees(empName: string) {
+    return this._http.get<Employee[]>(`${this.url}?search=${empName}`);
   }
 
   getEmployee(empId: number) {
@@ -30,3 +34,21 @@ export class EmployeeService {
     return this._http.delete(this.url + '/' + empId);
   }
 }
+
+// GET /api/employees.php?search=Akshay
+
+// {
+//   "matched": 1,
+//   "results": [
+//     {
+//       "id": 1,
+//       "name": "Akshay Palwe",
+//       "role": "Developer",
+//       "date_of_joining": "2022-03-12",
+//       "salary": "2500000"
+//     }
+//   ],
+//   "counter": {
+//     "value": 0
+//   }
+// }

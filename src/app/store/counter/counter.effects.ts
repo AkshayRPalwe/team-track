@@ -6,9 +6,7 @@ import * as CounterActions from './counter.actions';
 
 @Injectable()
 export class CounterEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {
-    console.log('Effects Constructor:', actions$, http);
-  }
+  constructor(private actions$: Actions, private http: HttpClient) {}
 
   loadCounter$ = createEffect(() =>
     this.actions$.pipe(

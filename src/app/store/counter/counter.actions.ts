@@ -4,6 +4,8 @@ export const increment = createAction('[Counter] Increment');
 export const decrement = createAction('[Counter] Decrement');
 export const reset = createAction('[Counter] Reset');
 export const loadCounter = createAction('[Counter] Load Counter');
+
+
 export const loadCounterSuccess = createAction(
   '[Counter] Load Counter Success',
   props<{ counter: number }>()

@@ -15,13 +15,14 @@ import { counterReducer } from './store/counter/counter.reducer';
 import { CounterEffects } from './store/counter/counter.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
+  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withFetch,
 } from '@angular/common/http';
 //Components
-import { EmployeeComponent } from './core/components/employee/employee.component';
-import { CounterComponent } from './core/components/counter/counter.component';
+import { EmployeeComponent } from './features/employee/employee/employee.component';
+
 // Angular Material
 
 import { Component, Inject, OnInit } from '@angular/core';
@@ -44,12 +45,17 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ToastrModule } from 'ngx-toastr';
-import { AddEmployeeComponent } from './core/components/add-employee/add-employee.component';
+import { AddEmployeeComponent } from './features/employee/add-employee/add-employee.component';
+import { CounterComponent } from './features/counter/counter.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { RegisterComponent } from './features/auth/register/register.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -57,6 +63,8 @@ import { AddEmployeeComponent } from './core/components/add-employee/add-employe
     CounterComponent,
     EmployeeComponent,
     AddEmployeeComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,16 +95,19 @@ import { AddEmployeeComponent } from './core/components/add-employee/add-employe
     MatDialogModule,
     MatTableModule,
     CommonModule,
+    FormsModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() {
-    console.log('✅ AppModule loaded');
-  }
-
+  constructor() {}
 }

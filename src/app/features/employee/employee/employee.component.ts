@@ -1,14 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
-import { Employee } from '../../models/employee.model';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { EmployeeService } from '../../services/employee.service';
-import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
+import { Employee } from '../../../core/models/employee.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { EmployeeService } from '../../../core/services/employee/employee.service';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Subscription,
+  switchMap,
+} from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-employee',
@@ -18,6 +21,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EmployeeComponent {
   empList: Employee[] = [];
+  searchControl = new FormControl('');
   dataSource!: MatTableDataSource<Employee>;
   displayedColumns: string[] = [
     'id',
@@ -31,7 +35,8 @@ export class EmployeeComponent {
 
   constructor(
     private _dialog: MatDialog,
-    private _employeeService: EmployeeService
+    private _employeeService: EmployeeService,
+    private authService: AuthService
   ) {}
 
   ngOnDestroy(): void {
@@ -40,13 +45,34 @@ export class EmployeeComponent {
 
   ngOnInit(): void {
     this.getAllEmployees();
+    this.setupSearch();
+  }
+
+  setupSearch() {
+    const searchSub = this.searchControl.valueChanges
+      .pipe(
+        debounceTime(1000), // Wait after typing
+        distinctUntilChanged(), // Only if value changed
+        switchMap((query) => {
+          if (!query || query.trim() === '') {
+            return this._employeeService.getAllEmployees();
+          }
+          return this._employeeService.getFilteredEmployees(query);
+        })
+      )
+      .subscribe((items: any) => {
+        this.empList = items.data || items.results || [];
+        this.dataSource = new MatTableDataSource(this.empList);
+      });
+
+    this.subscriptions.add(searchSub);
   }
 
   getAllEmployees() {
     let subscribeGetAllEmployees = this._employeeService
       .getAllEmployees()
-      .subscribe((item) => {
-        this.empList = item;
+      .subscribe((item: any) => {
+        this.empList = item.data;
         this.dataSource = new MatTableDataSource(this.empList);
       });
     this.subscriptions.add(subscribeGetAllEmployees);
@@ -54,6 +80,10 @@ export class EmployeeComponent {
 
   addEmployee() {
     this.openPopup(0);
+  }
+
+  logout() {
+    this.authService.clearToken();
   }
 
   deleteEmployee(empId: number) {
@@ -86,4 +116,3 @@ export class EmployeeComponent {
       });
   }
 }
- 

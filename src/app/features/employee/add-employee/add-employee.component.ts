@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Employee } from '../../models/employee.model';
-import { EmployeeService } from '../../services/employee.service';
+import { Employee } from '../../../core/models/employee.model';
+import { EmployeeService } from '../../../core/services/employee/employee.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-employee',
@@ -54,7 +54,6 @@ export class AddEmployeeComponent {
 
   saveEmployee() {
     if (this.empForm.valid) {
-      console.log(this.empForm.value);
       let data: Employee = {
         id: this.empForm.value.id as number,
         name: this.empForm.value.name as string,

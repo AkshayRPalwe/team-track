@@ -1,16 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CounterComponent } from './core/components/counter/counter.component';
-import { EmployeeComponent } from './core/components/employee/employee.component';
+
+import { EmployeeComponent } from './features/employee/employee/employee.component';
+import { CounterComponent } from './features/counter/counter.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { AuthGuard } from './core/guards/auth/auth.guard';
+import { LoginGuard } from './core/guards/login/login.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: CounterComponent,
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'employee',
     component: EmployeeComponent,
+    // loadComponent: () =>
+    //   import('./features/employee/employee/employee.component').then(
+    //     (e) => e.EmployeeComponent
+    //   ),
+    canActivate: [AuthGuard],
   },
 ];
 
